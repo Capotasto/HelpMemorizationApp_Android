@@ -1,5 +1,6 @@
 package com.capotasto.helpmemorizationapp;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,27 +10,53 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static SQLiteDatabase db;
+    private static final String TABLE_NAME = "vocabularies";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
+        //make Database
+        DatabaseHandler databaseHandler = new DatabaseHandler(getBaseContext());
+        db = databaseHandler.getWritableDatabase();
+
+        //Insert TestData
+        Vocabulary insertWord1 = new Vocabulary(1,"dog","animal","Dog is dog.","dog");
+        Vocabulary insertWord2 = new Vocabulary(2,"cat","animal","Cat is cat.","cat");
+        Vocabulary insertWord3 = new Vocabulary(3,"fish","fish","Fish is fish.","fish");
+        Vocabulary insertWord4 = new Vocabulary(4,"rice","food","Rice is food.","rice");
+        Vocabulary insertWord5 = new Vocabulary(5,"monkey","animal","Monkey is monkey.","monkey");
+
+        databaseHandler.addWord(insertWord1);
+        databaseHandler.addWord(insertWord2);
+        databaseHandler.addWord(insertWord3);
+        databaseHandler.addWord(insertWord4);
+        databaseHandler.addWord(insertWord5);
+
+        //Read Database
+        List<Vocabulary> vocabularyList = databaseHandler.getAllWords();
+
         final ListView listView = (ListView) findViewById(R.id.main_list);
-        String[] values = new String[]{"Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile"
-        };
+//        String[] values = new String[]{"Android", "iPhone", "WindowsMobile",
+//                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
+//                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
+//                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
+//                "Android", "iPhone", "WindowsMobile"
+//        };
 
         ArrayList<String> list = new ArrayList<>();
-        for(String value : values){
-            list.add(value);
+
+        for (Vocabulary vocabulary : vocabularyList) {
+            list.add(vocabulary.getWord());
         }
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
 
     }
@@ -59,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     /*
         ADD WORD Button is clicked
      */
-    public void addNewWord(View view){
+    public void addNewWord(View view) {
 
     }
 }
