@@ -1,6 +1,7 @@
 package com.capotasto.helpmemorizationapp;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
         db = databaseHandler.getWritableDatabase();
 
         //Insert TestData
-        Vocabulary insertWord1 = new Vocabulary(1,"dog","animal","Dog is dog.","dog");
-        Vocabulary insertWord2 = new Vocabulary(2,"cat","animal","Cat is cat.","cat");
-        Vocabulary insertWord3 = new Vocabulary(3,"fish","fish","Fish is fish.","fish");
-        Vocabulary insertWord4 = new Vocabulary(4,"rice","food","Rice is food.","rice");
-        Vocabulary insertWord5 = new Vocabulary(5,"monkey","animal","Monkey is monkey.","monkey");
+        Vocabulary insertWord1 = new Vocabulary(1, "dog", "animal", "Dog is dog.", "dog");
+        Vocabulary insertWord2 = new Vocabulary(2, "cat", "animal", "Cat is cat.", "cat");
+        Vocabulary insertWord3 = new Vocabulary(3, "fish", "fish", "Fish is fish.", "fish");
+        Vocabulary insertWord4 = new Vocabulary(4, "rice", "food", "Rice is food.", "rice");
+        Vocabulary insertWord5 = new Vocabulary(5, "monkey", "animal", "Monkey is monkey.", "monkey");
 
         databaseHandler.addWord(insertWord1);
         databaseHandler.addWord(insertWord2);
@@ -58,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
+
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.btn_add_word);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
 
     }
 

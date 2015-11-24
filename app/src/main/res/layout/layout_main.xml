@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,21 +12,19 @@
 
     </ListView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_add_word"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/Orange">
-
-        <Button
-            android:id="@+id/btn_add_word"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:text="Add Word"
-            android:onClick="addNewWord"/>
-
-    </RelativeLayout>
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:elevation="8dp"
+        android:padding="16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_add_black_48dp"
+        app:pressedTranslationZ="@dimen/activity_vertical_margin"
+        app:rippleColor="@color/accent" />
 
 </RelativeLayout>
